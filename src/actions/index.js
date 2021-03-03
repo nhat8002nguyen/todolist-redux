@@ -20,9 +20,14 @@ const checkItem = (id) => ({
   payload: id,
 });
 
+const clearDoneItems = () => ({
+  type: "CLEAR_DONE_ITEMS",
+  payload: [],
+});
+
 const clearAllItems = () => ({
   type: "CLEAR_ALL_ITEMS",
   payload: [],
 });
 
-export { addItem, removeItem, checkItem, clearAllItems };
+export { addItem, removeItem, checkItem, clearAllItems, clearDoneItems };

@@ -17,6 +17,14 @@ const items = (state = [], action) => {
         }
       }
       return newState;
+    case "CLEAR_DONE_ITEMS":
+      let doneItems = [];
+      for (let i = 0; i < state.length; i++) {
+        if (state[i].isDone === false) {
+          doneItems.push(state[i]);
+        }
+      }
+      return doneItems;
     case "CLEAR_ALL_ITEMS":
       return action.payload;
     default:

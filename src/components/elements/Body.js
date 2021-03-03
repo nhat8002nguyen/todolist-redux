@@ -7,7 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import { addItem, clearAllItems } from "../../actions";
+import { addItem, clearAllItems, clearDoneItems } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,8 +42,17 @@ const useStyles = makeStyles((theme) => ({
   clearAllBtn: {
     marginBottom: 20,
     marginTop: 100,
+    margin: "auto",
   },
-
+  clearDoneBtn: {
+    marginBottom: 20,
+    marginTop: 100,
+    margin: "auto",
+  },
+  clrBtn: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
   outputTitle: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(3),
@@ -143,19 +152,32 @@ export default function Body(props) {
                 ></Item>
               ))}
             </div>
-
-            {items.length > 0 && (
-              <Button
-                className={classes.clearAllBtn}
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                  dispatch(clearAllItems());
-                }}
-              >
-                Clear All
-              </Button>
-            )}
+            <div className={classes.clrBtn}>
+              {items.length > 0 && (
+                <Button
+                  className={classes.clearAllBtn}
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    dispatch(clearAllItems());
+                  }}
+                >
+                  clear all
+                </Button>
+              )}
+              {items.length > 0 && (
+                <Button
+                  className={classes.clearDoneBtn}
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    dispatch(clearDoneItems());
+                  }}
+                >
+                  clear done
+                </Button>
+              )}
+            </div>
           </Paper>
         </Grid>
       </Grid>
