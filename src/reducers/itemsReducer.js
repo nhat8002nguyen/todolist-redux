@@ -7,6 +7,18 @@ const items = (state = [], action) => {
   switch (action.type) {
     case "ADD_ITEM":
       return [...state, action.payload];
+    case "EDIT_ITEM":
+      let editedItems = [...state];
+      for (let i = 0; i < editedItems.length; i++) {
+        if (editedItems[i]._id === action.payload._id) {
+          editedItems[i] = {
+            ...editedItems[i],
+            name: action.payload.name,
+            description: action.payload.description,
+          };
+        }
+      }
+      return editedItems;
     case "REMOVE_ITEM":
       return state.filter((item) => item._id !== action.payload);
     case "CHECK_ITEM":

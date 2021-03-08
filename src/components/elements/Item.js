@@ -5,7 +5,14 @@ import { Typography } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Checkbox from "@material-ui/core/Checkbox";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { checkItem, removeItem } from "../../actions";
+import EditIcon from "@material-ui/icons/Edit";
+import Popover from "@material-ui/core/Popover";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import { checkItem, removeItem, editItem } from "../../actions";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     display: "inline-block",
-    margin: "auto 20px auto 20px",
+    margin: "auto auto auto 20px",
     width: "60%",
   },
   expand: {
@@ -31,12 +38,27 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     left: theme.spacing(4),
   },
+  editIcon: {
+    position: "relative",
+    top: theme.spacing(1),
+    "& hover": {
+      cursor: "pointer",
+      color: "blue",
+    },
+  },
+  editBtn: {
+    marginTop: "1rem",
+    width: 70,
+    height: 30,
+  },
+
   delete: {
     position: "relative",
     top: theme.spacing(1),
+    color: "red",
     "&:hover": {
       cursor: "pointer",
-      color: "red",
+      color: "blue",
     },
   },
 }));
@@ -49,11 +71,26 @@ export default function Item({ _id, name, description }) {
   const [checked, setChecked] = React.useState(false);
   const [lineThrough, setLineThrough] = React.useState(false);
   const [expand, setExpanded] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [editedName, setEditedName] = React.useState("");
+  const [editedDescription, setEditedDescription] = React.useState("");
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const handleCheckbox = (e) => {
     setLineThrough(!lineThrough);
     setChecked(e.target.checked);
     dispatch(checkItem(_id));
+  };
+
+  const handleEdit = () => {
+    // send action to the store
+    dispatch(editItem(_id, editedName, editedDescription));
+    // remove edit status and close the pop
+    setEditedName("");
+    setEditedDescription("");
+    setAnchorEl(null);
   };
 
   const deleteItem = () => {
@@ -74,6 +111,56 @@ export default function Item({ _id, name, description }) {
       >
         {name}
       </Typography>
+      <EditIcon
+        className={classes.editIcon}
+        onClick={(e) => {
+          setAnchorEl(e.currentTarget);
+          setEditedName(name);
+          setEditedDescription(description);
+        }}
+      ></EditIcon>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <div style={{ padding: "20px 20px 20px 20px" }}>
+          <FormControl>
+            <InputLabel htmlFor="component-simple">Name</InputLabel>
+            <Input
+              id="component-simple"
+              value={editedName}
+              onChange={(e) => setEditedName(e.target.value)}
+            />
+            <TextField
+              id="outlined-multiline-flexible"
+              variant="outlined"
+              label="Description"
+              multiline
+              style={{ marginTop: "10px" }}
+              value={editedDescription}
+              onChange={(e) => setEditedDescription(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.editBtn}
+              onClick={handleEdit}
+            >
+              Confirm
+            </Button>
+          </FormControl>
+        </div>
+      </Popover>
       {description.length > 0 && (
         <ExpandMoreIcon
           className={classes.expand}

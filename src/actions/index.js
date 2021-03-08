@@ -10,6 +10,15 @@ const addItem = (name, description, isDone = false) => ({
   },
 });
 
+const editItem = (id, name, description) => ({
+  type: "EDIT_ITEM",
+  payload: {
+    _id: id,
+    name: name,
+    description: description,
+  },
+});
+
 const removeItem = (id) => ({
   type: "REMOVE_ITEM",
   payload: id,
@@ -30,4 +39,11 @@ const clearAllItems = () => ({
   payload: [],
 });
 
-export { addItem, removeItem, checkItem, clearAllItems, clearDoneItems };
+export {
+  addItem,
+  editItem,
+  removeItem,
+  checkItem,
+  clearAllItems,
+  clearDoneItems,
+};

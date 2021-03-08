@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Comic Sans MS",
     fontStyle: "Italic",
   },
+  listItem: {
+    flexGrow: 1,
+    alignItem: "center",
+    width: "100%",
+  },
   clearAllBtn: {
     marginBottom: 20,
     marginTop: 100,
@@ -141,7 +146,7 @@ export default function Body(props) {
             >
               List To-do
             </Typography>
-            <div>
+            <div className={classes.listItem}>
               {items.map((item) => (
                 <Item
                   key={item._id}
