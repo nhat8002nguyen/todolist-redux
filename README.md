@@ -4,7 +4,7 @@ Actually, I think, this small app doesn't need to use redux, but I use it for do
 
 # Demo
 
-https://youtube.com/nhatnguyen/demo/
+https://youtu.be/C_UvBCVsbfw
 
 # Screenshot
 
