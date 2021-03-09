@@ -8,7 +8,7 @@ https://youtube.com/nhatnguyen/demo/
 
 # Screenshot
 
-[Alt text](https://github.com/nhat8002nguyen/todolist-redux/blob/main/screenshots/Screenshot%20from%202021-03-09%2018-26-30.png "Main app screen")
+![](https://github.com/nhat8002nguyen/todolist-redux/blob/main/screenshots/Screenshot%20from%202021-03-09%2018-26-30.png "Main app screen")
 
 # Framework, library
 
