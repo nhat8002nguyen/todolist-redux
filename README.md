@@ -6,6 +6,9 @@ Actually, I think, this small app doesn't need to use redux, but I use it for do
 
 https://youtu.be/C_UvBCVsbfw
 
+https://user-images.githubusercontent.com/58263449/116231550-38c63400-a783-11eb-9bf4-12c7937d0916.mp4
+
+
 # Screenshot
 
 ![](https://github.com/nhat8002nguyen/todolist-redux/blob/main/screenshots/Screenshot%20from%202021-03-09%2018-26-30.png "Main app screen")
